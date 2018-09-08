@@ -6,23 +6,29 @@
 #    By: sganon <sganon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/05 17:32:32 by sganon            #+#    #+#              #
-#    Updated: 2018/09/08 17:15:25 by sganon           ###   ########.fr        #
+#    Updated: 2018/09/08 17:55:41 by sganon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+OS = $(shell uname)
 
 ifeq ($(HOSTTYPE), )
 	HOSTTYPE 		:= $(shell uname -m)_$(shell uname -s)
 endif
 
-NAME					= libft_malloc_${HOSTTYPE}.so
-LINKED_NAME		= libft_malloc.so
+NAME				= libft_malloc_${HOSTTYPE}.so
+LINKED_NAME			= libft_malloc.so
 
-CC						= gcc
+CC					= gcc
 CC_FLAGS			= -shared -Wall -Werror -Wextra -fPIC
 INC_FLAG			= -I./includes
 
-SRCS					:= $(shell find -E src -regex '[a-zA-Z.\/_0-9]+\.c$$' | sed 's|^./||')
-
+ifeq ($(OS), Linux)
+	SRCS			= $(shell find src -regex '[a-zA-Z.\/_0-9]+\.c$$')
+endif
+ifeq ($(OS), Darwin)
+	SRCS			= $(shell find -E src -regex '[a-zA-Z.\/_0-9]+\.c$$' | sed 's|^./||')
+endif
 
 $(BUILD_DIR)/%.c.o: %.c
 	@mkdir -p $(dir $@)
