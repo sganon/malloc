@@ -6,23 +6,22 @@
 #    By: sganon <sganon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/05 17:32:32 by sganon            #+#    #+#              #
-#    Updated: 2018/08/05 18:05:08 by sganon           ###   ########.fr        #
+#    Updated: 2018/09/08 17:15:25 by sganon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ifeq ($(HOSTTYPE), )
-	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
+	HOSTTYPE 		:= $(shell uname -m)_$(shell uname -s)
 endif
 
-NAME			= libft_malloc_${HOSTTYPE}.so
+NAME					= libft_malloc_${HOSTTYPE}.so
 LINKED_NAME		= libft_malloc.so
 
-CC				= gcc
-CC_FLAGS		= -shared -Wall -Werror -Wextra -fPIC
-INC_FLAGS		= -I./includes
+CC						= gcc
+CC_FLAGS			= -shared -Wall -Werror -Wextra -fPIC
+INC_FLAG			= -I./includes
 
-SRC_DIRS		= ./src
-SRCS			:= $(shell find $(SRC_DIRS) -regex '[a-zA-Z.\/_0-9]+\.c$$' | sed 's|^./||')
+SRCS					:= $(shell find -E src -regex '[a-zA-Z.\/_0-9]+\.c$$' | sed 's|^./||')
 
 
 $(BUILD_DIR)/%.c.o: %.c
@@ -42,3 +41,14 @@ symlink:
 		/bin/ln -s ${NAME} ${LINKED_NAME}; \
 		printf "\e[36mSymlink $(NAME) -> $(LINKED_NAME) created\e[0m\n"; \
 	fi
+
+clean:
+	@rm -rf $(BUILD_DIR)
+	@printf "\e[36mObject cleaned\e[0m\n"
+
+fclean : clean
+	@rm -f $(NAME) $(LINKED_NAME)
+	@printf "\e[36mMalloc libraries removed\e[0m\n"
+
+re : fclean all
+
