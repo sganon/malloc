@@ -6,7 +6,7 @@
 #    By: sganon <sganon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/05 17:32:32 by sganon            #+#    #+#              #
-#    Updated: 2018/09/17 15:22:24 by sganon           ###   ########.fr        #
+#    Updated: 2018/09/17 16:39:03 by sganon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ $(TESTS_NAME): $(NAME)
 	@printf "Using sources:\n\t$(TEST_SRCS)\n"
 	@$(CC) $(CC_FLAGS_TESTS) $(TEST_SRCS) $(INC_FLAG) $(LIBFT_FLAG) -o $(TESTS_NAME)
 
-test: $(TESTS_NAME) run
+test: $(TESTS_NAME)
 
 run:
 	./$(TESTS_NAME)
