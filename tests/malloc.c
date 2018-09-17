@@ -6,7 +6,7 @@
 /*   By: sganon <sganon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 19:54:18 by sganon            #+#    #+#             */
-/*   Updated: 2018/09/17 15:12:58 by sganon           ###   ########.fr       */
+/*   Updated: 2018/09/17 21:09:26 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int main()
     ft_putendl("Pointer shouldn\'t be null after calling malloc");
     return(1);
   }
+  // show_alloc_mem();
   return(0);
 }
