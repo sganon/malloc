@@ -6,7 +6,7 @@
 /*   By: sganon <sganon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 18:36:51 by sganon            #+#    #+#             */
-/*   Updated: 2018/09/17 21:05:41 by sganon           ###   ########.fr       */
+/*   Updated: 2018/09/18 13:13:20 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef struct    s_allocs
 {
  struct  s_allocs *end;
  struct  s_allocs *next;
- struct  s_allocs *prev;
 }                 t_allocs;
 
 typedef struct    s_mem_handler

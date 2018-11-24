@@ -6,7 +6,7 @@
 #    By: sganon <sganon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/05 17:32:32 by sganon            #+#    #+#              #
-#    Updated: 2018/09/17 16:39:03 by sganon           ###   ########.fr        #
+#    Updated: 2018/11/24 14:13:58 by sganon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,8 @@ endif
 NAME						= libft_malloc_${HOSTTYPE}.so
 LINKED_NAME			= libft_malloc.so
 
-TESTS_NAME			= malloc_tests
-
 CC							= gcc
 CC_FLAGS				= -shared -Wall -Werror -Wextra -fPIC
-CC_FLAGS_TESTS	= -Wall -Werror -Wextra
 INC_FLAG				= -I./includes -I./libft
 LIBFT_FLAG			= -L./libft -lft
 
@@ -61,31 +58,27 @@ $(NAME): $(SRCS)
 	@$(CC) $(CC_FLAGS) $(SRCS) $(INC_FLAG) $(LIBFT_FLAG) -o $@ 
 	@printf "\e[32m$@ created\e[0m\n"
 
-$(TESTS_NAME): $(NAME)
-	@printf "\e[36mStarting tests compilation\e[0m\n"
-	@printf "Using sources:\n\t$(TEST_SRCS)\n"
-	@$(CC) $(CC_FLAGS_TESTS) $(TEST_SRCS) $(INC_FLAG) $(LIBFT_FLAG) -o $(TESTS_NAME)
-
-test: $(TESTS_NAME)
-
-run:
-	./$(TESTS_NAME)
-
 symlink:
 	@if [ ! -e ${LINKED_NAME} ]; then \
 		/bin/ln -s ${NAME} ${LINKED_NAME}; \
 		printf "\e[36mSymlink $(NAME) -> $(LINKED_NAME) created\e[0m\n"; \
 	fi
 
+test: $(NAME)
+	@make -C tests
+	@printf "\e[36mTest compiled you can run ./tests/malloc_tests\e[0m\n"
+
 clean:
 	@make -C libft/ clean
 	@rm -rf $(BUILD_DIR)
 	@printf "\e[36mObject cleaned\e[0m\n"
+	@make -C tests/ clean
 
 fclean : clean
 	@make -C libft/ fclean
 	@rm -f $(NAME) $(LINKED_NAME)
 	@printf "\e[36mMalloc libraries removed\e[0m\n"
+	@make -C tests/ fclean
 
 re : fclean all
 

@@ -2,3 +2,4 @@ libft_malloc*.so
 libft/
 malloc_tests
 *.pdf
+tests/objects

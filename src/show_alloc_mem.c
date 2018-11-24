@@ -6,7 +6,7 @@
 /*   By: sganon <sganon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:21:36 by sganon            #+#    #+#             */
-/*   Updated: 2018/09/17 21:49:29 by sganon           ###   ########.fr       */
+/*   Updated: 2018/09/18 13:09:47 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,26 @@ void to_upper_str(char *str)
   }
 }
 
+void print_addr(void *ptr)
+{
+  char *addr;
+
+  addr = ft_itoa_base((uintptr_t)ptr, 16);
+  to_upper_str(addr);
+  ft_putstr("0x");
+  ft_putstr(addr);
+}
+
 void display_allocs(t_allocs *allocs, char *name)
 {
-  char *base_addr;
-
-  base_addr = ft_itoa_base((uintptr_t)allocs, 16);
-  to_upper_str(base_addr);
   ft_putstr(name);
-  ft_putstr(" : 0x");
-  ft_putendl(base_addr);
+  ft_putstr(" : ");
+  print_addr(allocs);
+  ft_putchar('\n');
+  while (allocs->next)
+  {
+    // print_addr(allocs->next);
+  }
 }
 
 void  show_alloc_mem()
