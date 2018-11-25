@@ -6,7 +6,7 @@
 /*   By: sganon <sganon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/05 17:35:09 by sganon            #+#    #+#             */
-/*   Updated: 2018/11/24 13:44:41 by sganon           ###   ########.fr       */
+/*   Updated: 2018/11/25 17:48:15 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,24 @@ static void		*add_alloc(t_allocs *start, long size, long max)
 }
 
 void    *malloc(size_t size)
-{
-  ft_putstr("Calling malloc with: "); ft_putnbr(size); ft_putchar('\n');
-  show_alloc_mem();
-    
+{    
   void	    *alloc;
 	t_allocs	*lrg;
+	size_t		saved_size; // tmp var for debug purpose;
 
+	saved_size = size;
 	size += sizeof(t_allocs);
 	alloc = NULL;
 	if (size <= TNY_ALLOC_MAX)
+	{
 		alloc = add_alloc(mem_handler()->tiny,
 				(long)size, getpagesize() * 100 * TNY_ALLOC_MAX);
+	}
 	else if (size <= SML_ALLOC_MAX)
+	{
 		alloc = add_alloc(mem_handler()->small,
 				(long)size, getpagesize() * 100 * SML_ALLOC_MAX);
-    ft_putendl("Alloc is a large one or no place has been found");
+	}
 	if (!alloc)
 	{
 		lrg = mem_handler()->large;
@@ -63,5 +65,8 @@ void    *malloc(size_t size)
 		lrg->next->next = NULL;
 		return (lrg->next + 1);
 	}
+	ft_putstr("Called malloc with: "); ft_putnbr(saved_size); ft_putchar('\n');
+  show_alloc_mem();
+	ft_putchar('\n');
 	return (alloc);
 }

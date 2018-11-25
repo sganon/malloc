@@ -6,7 +6,7 @@
 /*   By: sganon <sganon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:21:36 by sganon            #+#    #+#             */
-/*   Updated: 2018/09/18 13:09:47 by sganon           ###   ########.fr       */
+/*   Updated: 2018/11/25 18:08:13 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,13 @@ void display_allocs(t_allocs *allocs, char *name)
   ft_putchar('\n');
   while (allocs->next)
   {
-    // print_addr(allocs->next);
+    allocs = allocs->next;
+    print_addr((void *)allocs + 1);
+    ft_putstr(" - ");
+    print_addr(allocs->end);
+    ft_putstr(" : ");
+    ft_putnbr((char *)allocs->end - (char *)allocs - sizeof(t_allocs));
+    ft_putchar('\n');
   }
 }
 
