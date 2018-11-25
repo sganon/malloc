@@ -6,13 +6,13 @@ if [ -d "libft/" ]; then
   cd libft/
   git stash
   git checkout master
-  if [[ ${DEPS_UPDATE} = "false" ]]; then
+  if [[ ${MALLOC_DEPS_UPDATE} = "false" ]]; then
     printf "${ORANGE}[WARN] Skipping libft update${NC}\n"
     exit 0
   fi
   git pull origin master
 else
-  if [[ ${DEPS_UPDATE} = "false" ]]; then
+  if [[ ${MALLOC_DEPS_UPDATE} = "false" ]]; then
     printf "${RED}[ERROR] Libft has not be fetched.${NC}\n"
     exit 1
   fi
