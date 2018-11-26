@@ -5,4 +5,4 @@ script:
   - make
   - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$TRAVIS_BUILD_DIR
   - make test
-  - LD_PRELOAD=$TRAVIS_BUILD_DIR/libft_malloc.so ./malloc_tests
+  - LD_PRELOAD=$TRAVIS_BUILD_DIR/libft_malloc.so ./tests/malloc_tests
