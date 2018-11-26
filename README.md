@@ -1,4 +1,5 @@
 # malloc
+[![Build Status](https://travis-ci.org/sganon/malloc.svg?branch=master)](https://travis-ci.org/sganon/malloc)
 
 Custom implementation of malloc, realloc and free functions of the lib C. This is a school project.
 
