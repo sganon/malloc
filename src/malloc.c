@@ -6,7 +6,7 @@
 /*   By: sganon <sganon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/05 17:35:09 by sganon            #+#    #+#             */
-/*   Updated: 2018/11/25 17:48:15 by sganon           ###   ########.fr       */
+/*   Updated: 2019/05/11 21:05:50 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void    *malloc(size_t size)
 		return (lrg->next + 1);
 	}
 	ft_putstr("Called malloc with: "); ft_putnbr(saved_size); ft_putchar('\n');
-  show_alloc_mem();
-	ft_putchar('\n');
+  //show_alloc_mem();
 	return (alloc);
 }

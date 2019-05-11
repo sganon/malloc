@@ -6,7 +6,7 @@
 /*   By: sganon <sganon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:21:36 by sganon            #+#    #+#             */
-/*   Updated: 2018/11/25 18:08:13 by sganon           ###   ########.fr       */
+/*   Updated: 2019/05/11 21:03:16 by simon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void display_allocs(t_allocs *allocs, char *name)
   while (allocs->next)
   {
     allocs = allocs->next;
-    print_addr((void *)allocs + 1);
+    print_addr((void *)allocs - sizeof(t_allocs)); 
     ft_putstr(" - ");
     print_addr(allocs->end);
     ft_putstr(" : ");
