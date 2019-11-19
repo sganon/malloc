@@ -3,3 +3,6 @@ libft/
 malloc_tests
 *.pdf
 tests/objects
+.ccls-cache/
+compile_commands.json
+build/

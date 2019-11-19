@@ -6,7 +6,7 @@
 #    By: sganon <sganon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/05 17:32:32 by sganon            #+#    #+#              #
-#    Updated: 2019/05/11 21:36:23 by simon            ###   ########.fr        #
+#    Updated: 2019/11/19 12:53:40 by simon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,11 @@ TEST_OBJS := $(TEST_SRCS:%=$(BUILD_DIR)/%.o)
 $(BUILD_DIR)/%.c.o: %.c
 	@mkdir -p $(dir $@)
 	@printf "Creating objects for:\n\t$<\n"
+ifeq ($(CC_JSON_FLAG), -MJ)
+	$(CC) $(CC_JSON_FLAG) $@.json $(CC_FLAGS) -c $< -o $@ $(INC_FLAG)
+else
 	$(CC) $(CC_FLAGS) -c $< -o $@ $(INC_FLAG)
+endif
 	@printf "\e[32mCreated $@\e[0m\n"
 
 all: deps $(NAME) symlink
@@ -58,6 +62,11 @@ $(NAME): deps includes/malloc.h $(OBJS)
 	@$(CC) $(CC_FLAGS) $(LIBFT_FLAG) -shared $(OBJS) -o $@
 	@printf "\e[32m$@ created\e[0m\n"
 	@make symlink
+
+compile_commands.json:
+	@rm -rf $(BUILD_DIR)
+	@make CC_JSON_FLAG="-MJ" $(NAME)
+	@/usr/bin/sed -e '1s/^/[/' -e '$$s/,$$/]/' $(BUILD_DIR)/**/*.o.json > compile_commands.json
 
 symlink:
 	@if [ ! -e ${LINKED_NAME} ]; then \
